@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/green"
+    },
+    {
+      "amount": 100,
+      "fluid": "confectioneering:flavoured_gloopy_icing",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "fluid": "confectioneering:green_flavoured_gloopy_icing"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "confectioneering:item/purple_iced_ringed_biscuit"
+  }
+}

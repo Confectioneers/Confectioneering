@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/light_blue"
+    },
+    {
+      "amount": 100,
+      "fluid": "confectioneering:flavoured_gloopy_icing",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "fluid": "confectioneering:light_blue_flavoured_gloopy_icing"
+    }
+  ]
+}

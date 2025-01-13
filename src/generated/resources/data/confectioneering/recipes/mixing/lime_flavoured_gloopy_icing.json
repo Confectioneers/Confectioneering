@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/lime"
+    },
+    {
+      "amount": 100,
+      "fluid": "confectioneering:flavoured_gloopy_icing",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "fluid": "confectioneering:lime_flavoured_gloopy_icing"
+    }
+  ]
+}

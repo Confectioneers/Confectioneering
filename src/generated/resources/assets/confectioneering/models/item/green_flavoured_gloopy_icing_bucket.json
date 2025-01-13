@@ -1,0 +1,9 @@
+{
+  "parent": "forge:item/bucket",
+  "apply_tint": true,
+  "fluid": "confectioneering:green_flavoured_gloopy_icing",
+  "loader": "forge:fluid_container",
+  "textures": {
+    "layer0": "confectioneering:item/green_flavoured_gloopy_icing_bucket"
+  }
+}

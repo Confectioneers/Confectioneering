@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "confectioneering:biscuit_dough"
+    }
+  ],
+  "processingTime": 100,
+  "results": [
+    {
+      "item": "confectioneering:flat_biscuit_dough"
+    }
+  ]
+}

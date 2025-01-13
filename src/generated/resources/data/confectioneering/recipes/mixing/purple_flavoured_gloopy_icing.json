@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "forge:dyes/purple"
+    },
+    {
+      "amount": 100,
+      "fluid": "confectioneering:flavoured_gloopy_icing",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "fluid": "confectioneering:purple_flavoured_gloopy_icing"
+    }
+  ]
+}

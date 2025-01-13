@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "confectioneering:item/partially_filled_cardboard_box"
+  }
+}

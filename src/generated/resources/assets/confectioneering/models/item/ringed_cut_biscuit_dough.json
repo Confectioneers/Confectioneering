@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "confectioneering:item/ringed_cut_biscuit_dough"
+  }
+}

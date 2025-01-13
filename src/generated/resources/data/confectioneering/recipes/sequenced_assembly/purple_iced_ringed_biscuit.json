@@ -1,0 +1,66 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "confectioneering:ringed_cut_biscuit"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "item": "confectioneering:purple_party_ring"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "confectioneering:dipping",
+      "ingredients": [
+        {
+          "item": "confectioneering:purple_iced_ringed_biscuit"
+        },
+        {
+          "amount": 100,
+          "fluid": "confectioneering:purple_flavoured_gloopy_icing",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:purple_iced_ringed_biscuit"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "confectioneering:purple_iced_ringed_biscuit"
+        },
+        {
+          "amount": 50,
+          "fluid": "confectioneering:white_flavoured_gloopy_icing",
+          "nbt": {}
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:purple_iced_ringed_biscuit"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "confectioneering:purple_iced_ringed_biscuit"
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:purple_iced_ringed_biscuit"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "confectioneering:purple_iced_ringed_biscuit"
+  }
+}

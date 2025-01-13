@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "confectioneering:item/flavoured_gloopy_icing_bucket"
+  }
+}

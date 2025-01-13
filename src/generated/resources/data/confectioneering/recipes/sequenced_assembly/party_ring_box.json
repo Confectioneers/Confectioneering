@@ -1,0 +1,97 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "confectioneering:cardboard_box"
+  },
+  "loops": 4,
+  "results": [
+    {
+      "item": "confectioneering:party_ring_box"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        },
+        {
+          "item": "confectioneering:pink_party_ring"
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        },
+        {
+          "item": "confectioneering:orange_party_ring"
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        },
+        {
+          "item": "confectioneering:white_party_ring"
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        },
+        {
+          "item": "confectioneering:yellow_party_ring"
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        },
+        {
+          "item": "confectioneering:purple_party_ring"
+        }
+      ],
+      "results": [
+        {
+          "item": "confectioneering:partially_filled_cardboard_box"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "confectioneering:partially_filled_cardboard_box"
+  }
+}
