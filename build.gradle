@@ -150,11 +150,6 @@ publishMods {
         minecraftVersions.add("1.20.1")
         requires("create")
     }
-    github {
-        repository = "Confectioneers/Confectioneering"
-        accessToken = providers.environmentVariable("GITHUB_TOKEN")
-        commitish = "main"
-    }
     discord {
         webhookUrl = providers.environmentVariable("DISCORD_WEBHOOK")
     }
