@@ -141,6 +141,7 @@ publishMods {
     file = jar.archiveFile
     type = STABLE
     modLoaders.add("forge")
+    changelog = rootProject.file("CHANGELOG.md").text
 
     curseforge {
         projectId = "1178595"

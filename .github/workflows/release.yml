@@ -12,7 +12,17 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v4
-      - run: ./gradlew build publishMods
+      - name: Run gradle tasks [build publishMods]
+        uses: gradle/gradle-build-action@v2
         env:
-          CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+          SNAPSHOT: false
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          arguments: "build publishMods"
+      - name: Store artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: gradle-build-output
+          path: ./**/libs/*.jar
