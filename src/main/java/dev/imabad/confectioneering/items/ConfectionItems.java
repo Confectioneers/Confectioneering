@@ -91,7 +91,7 @@ public class ConfectionItems {
                             .pattern("C C")
                             .pattern(" C ")
                             .define('C', forgeItemTag("ingots/iron"))
-                            .unlockedBy("has_iron_ingot", RegistrateRecipeProvider.has(forgeItemTag("ingots/iron")))
+                            .unlockedBy("has_ringed_biscuit_cutter", RegistrateRecipeProvider.has(c.get()))
                             .save(p)
             )
             .register();
@@ -167,61 +167,62 @@ public class ConfectionItems {
                             .register()).collect(Collectors.toUnmodifiableList());
 
 
-    public static final RegistryEntry<SequencedAssemblyItem> INCOMPLETE_CARDBOARD_PIECE = REGISTRATE.item("incomplete_cardboard_piece", SequencedAssemblyItem::new)
-            .defaultModel()
-            .lang("Incomplete Cardboard Piece")
-            .register();
-
-    public static final RegistryEntry<Item> CARDBOARD_PIECE = REGISTRATE.item("cardboard_piece", Item::new)
-            .defaultModel()
-            .lang("Cardboard Piece")
-            .recipe((c, p) -> {
-                new SequencedAssemblyRecipeBuilder(new ResourceLocation(Confectioneering.MOD_ID, "cardboard_piece"))
-                        .require(Items.PAPER)
-                        .transitionTo(INCOMPLETE_CARDBOARD_PIECE.get())
-                        .addOutput(new ItemStack(c.get(), 3), 1)
-                        .loops(5)
-                        .addStep(DeployerApplicationRecipe::new, rb -> rb.require(AllItems.SUPER_GLUE).toolNotConsumed())
-                        .addStep(DeployerApplicationRecipe::new, rb -> rb.require(Items.PAPER))
-                        .addStep(PressingRecipe::new, rb -> rb)
-                        .build(p);
-            })
-            .register();
-
-    public static final RegistryEntry<Item> CARDBOARD_BOX = REGISTRATE.item("cardboard_box", Item::new)
-            .defaultModel()
-            .lang("Cardboard Box")
-            .recipe((c, p) -> {
-                MechanicalCraftingRecipeBuilder.shapedRecipe(c.get())
-                        .key('C', CARDBOARD_PIECE.get())
-                        .patternLine(" C ")
-                        .patternLine("C C")
-                        .patternLine(" C ")
-                        .build(p);
-            })
-            .register();
-
-    public static final RegistryEntry<SequencedAssemblyItem> PARTIALLY_FILLED_BOX = REGISTRATE.item("partially_filled_cardboard_box", SequencedAssemblyItem::new)
-            .defaultModel()
-            .lang("Partially Filled Box")
-            .register();
-
-    public static final RegistryEntry<FilledBoxItem> PARTY_RINGS_BOX = REGISTRATE.item("party_ring_box", FilledBoxItem::new)
-            .defaultModel()
-            .lang("Party Ring Box")
-            .recipe((c, p) -> {
-                SequencedAssemblyRecipeBuilder partyRingBoxBuilder = new SequencedAssemblyRecipeBuilder(new ResourceLocation(Confectioneering.MOD_ID, "party_ring_box"))
-                        .require(CARDBOARD_BOX.get())
-                        .transitionTo(PARTIALLY_FILLED_BOX.get())
-                        .addOutput(c.get(), 1)
-                        .loops(4);
-                for (PartyRingColours value : PartyRingColours.values()) {
-                    partyRingBoxBuilder.addStep(DeployerApplicationRecipe::new, rb -> rb.require(PARTY_RINGS.get(value).get()));
-                }
-                partyRingBoxBuilder
-                        .build(p);
-            })
-            .register();
+//    public static final RegistryEntry<SequencedAssemblyItem> INCOMPLETE_CARDBOARD_PIECE = REGISTRATE.item("incomplete_cardboard_piece", SequencedAssemblyItem::new)
+//            .defaultModel()
+//            .lang("Incomplete Cardboard Piece")
+//            .register();
+//
+//    public static final RegistryEntry<Item> CARDBOARD_PIECE = REGISTRATE.item("cardboard_piece", Item::new)
+//            .defaultModel()
+//            .lang("Cardboard Piece")
+//            .recipe((c, p) -> {
+//                new SequencedAssemblyRecipeBuilder(new ResourceLocation(Confectioneering.MOD_ID, "cardboard_piece"))
+//                        .require(Items.PAPER)
+//                        .transitionTo(INCOMPLETE_CARDBOARD_PIECE.get())
+//                        .addOutput(new ItemStack(c.get(), 3), 1)
+//                        .loops(5)
+//                        .addStep(DeployerApplicationRecipe::new, rb -> rb.require(AllItems.SUPER_GLUE).toolNotConsumed())
+//                        .addStep(DeployerApplicationRecipe::new, rb -> rb.require(Items.PAPER))
+//                        .addStep(PressingRecipe::new, rb -> rb)
+//                        .build(p);
+//            })
+//            .register();
+//
+//    public static final RegistryEntry<Item> CARDBOARD_BOX = REGISTRATE.item("cardboard_box", Item::new)
+//            .defaultModel()
+//            .lang("Cardboard Box")
+//            .recipe((c, p) -> {
+//                MechanicalCraftingRecipeBuilder.shapedRecipe(c.get())
+//                        .key('C', CARDBOARD_PIECE.get())
+//                        .patternLine(" C ")
+//                        .patternLine("C C")
+//                        .patternLine(" C ")
+//                        .build(p);
+//            })
+//            .register();
+//
+//    public static final RegistryEntry<SequencedAssemblyItem> PARTIALLY_FILLED_BOX = REGISTRATE.item("partially_filled_cardboard_box", SequencedAssemblyItem::new)
+//            .defaultModel()
+//            .lang("Partially Filled Box")
+//            .register();
+//
+//    public static final RegistryEntry<FilledBoxItem> PARTY_RINGS_BOX = REGISTRATE.item("party_ring_box", FilledBoxItem::new)
+//            .defaultModel()
+//            .lang("Party Ring Box")
+//            .properties(properties -> properties.stacksTo(16))
+//            .recipe((c, p) -> {
+//                SequencedAssemblyRecipeBuilder partyRingBoxBuilder = new SequencedAssemblyRecipeBuilder(new ResourceLocation(Confectioneering.MOD_ID, "party_ring_box"))
+//                        .require(CARDBOARD_BOX.get())
+//                        .transitionTo(PARTIALLY_FILLED_BOX.get())
+//                        .addOutput(c.get(), 1)
+//                        .loops(4);
+//                for (PartyRingColours value : PartyRingColours.values()) {
+//                    partyRingBoxBuilder.addStep(DeployerApplicationRecipe::new, rb -> rb.require(PARTY_RINGS.get(value).get()));
+//                }
+//                partyRingBoxBuilder
+//                        .build(p);
+//            })
+//            .register();
 
     private static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry, ResourceLocation id) {
         return registry.tags().createOptionalTagKey(id, Collections.emptySet());

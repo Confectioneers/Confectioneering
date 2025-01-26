@@ -35,10 +35,22 @@ public class ConfectionFluids {
     }
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> GLOOPY_ICING = basicFluid("gloopy_icing")
+            .properties(b -> b.viscosity(1500)
+                    .density(1400))
+            .fluidProperties(p -> p.levelDecreasePerBlock(2)
+                    .tickRate(25)
+                    .slopeFindDistance(3)
+                    .explosionResistance(100f))
             .lang("Gloopy Icing")
             .register();
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FLAVOURED_GLOOPY_ICING = basicFluid("flavoured_gloopy_icing")
+            .properties(b -> b.viscosity(1500)
+                    .density(1400))
+            .fluidProperties(p -> p.levelDecreasePerBlock(2)
+                    .tickRate(25)
+                    .slopeFindDistance(3)
+                    .explosionResistance(100f))
             .lang("Flavoured Gloopy Icing")
             .register();
 

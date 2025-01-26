@@ -5,6 +5,7 @@ import com.simibubi.create.foundation.block.IBE;
 import dev.imabad.confectioneering.blocks.ConfectionBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 
 public class LargeCardboardBoxBlock extends HorizontalDirectionalBlock implements IBE<LargeCardboardBoxBlockEntity> {
     public LargeCardboardBoxBlock(Properties pProperties) {
@@ -51,17 +53,11 @@ public class LargeCardboardBoxBlock extends HorizontalDirectionalBlock implement
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
                                  BlockHitResult hit) {
-        if(!worldIn.isClientSide()) {
-            onBlockEntityUse(worldIn, pos, (be) -> {
-                if (be.state == LargeCardboardBoxBlockEntity.State.CLOSED) {
-                    be.open();
-                } else if(be.state == LargeCardboardBoxBlockEntity.State.OPEN){
-                    be.close();
-                }
-                return InteractionResult.PASS;
-            });
-        }
-        return InteractionResult.PASS;
+        if (worldIn.isClientSide)
+            return InteractionResult.SUCCESS;
+        withBlockEntityDo(worldIn, pos,
+                largeCardboardBoxBlockEntity -> NetworkHooks.openScreen((ServerPlayer) player, largeCardboardBoxBlockEntity, largeCardboardBoxBlockEntity::sendToMenu));
+        return InteractionResult.SUCCESS;
     }
 
     @Override
