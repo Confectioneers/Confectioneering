@@ -110,8 +110,6 @@ mixin {
     // MixinGradle Settings
     add sourceSets.main, 'mixins.confectioneering.refmap.json'
     config 'mixins.confectioneering.json'
-    debug.verbose = true
-    debug.export = true
 }
 
 tasks.named('jar', Jar).configure {
