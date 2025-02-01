@@ -1,35 +1,21 @@
 package dev.imabad.confectioneering.machines.dipper;
 
-import com.google.common.collect.ImmutableList;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.fluids.drain.ItemDrainItemHandler;
-import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
-import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
-import com.simibubi.create.content.kinetics.press.PressingRecipe;
-import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
-import com.simibubi.create.content.kinetics.saw.SawBlock;
-import com.simibubi.create.content.logistics.depot.EjectorBlockEntity;
-import com.simibubi.create.content.processing.basin.BasinRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingInventory;
-import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
-import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.simibubi.create.foundation.recipe.RecipeConditions;
 import com.simibubi.create.foundation.recipe.RecipeFinder;
-import com.simibubi.create.foundation.utility.Iterate;
 import com.simibubi.create.foundation.utility.NBTHelper;
 import com.simibubi.create.foundation.utility.VecHelper;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
-import com.simibubi.create.infrastructure.config.AllConfigs;
 import dev.imabad.confectioneering.ConfectionRecipeTypes;
-import dev.imabad.confectioneering.Confectioneering;
+import dev.imabad.confectioneering.util.RecipeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -38,8 +24,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -47,9 +31,10 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -161,7 +146,7 @@ public class DipperBlockEntity extends KineticBlockEntity {
         List<Recipe<?>> startedSearch = RecipeFinder.get(dippingRecipesKey, level, types);
         startedSearch = startedSearch.stream()
                 .filter(RecipeConditions.firstIngredientMatches(inventory.getStackInSlot(0)))
-                .filter(fluidMatches(internalTank.getPrimaryHandler().getFluid()))
+                .filter(RecipeUtils.fluidMatches(internalTank.getPrimaryHandler().getFluid()))
                 .filter(r -> !AllRecipeTypes.shouldIgnoreInAutomation(r))
                 .collect(Collectors.toList());
         List<DippingRecipe> collect = SequencedAssemblyRecipe.getRecipes(level, inventory.getStackInSlot(0), ConfectionRecipeTypes.DIPPING.getType(), DippingRecipe.class)
@@ -170,10 +155,7 @@ public class DipperBlockEntity extends KineticBlockEntity {
         return startedSearch;
     }
 
-    public static Predicate<Recipe<?>> fluidMatches(FluidStack fluidStack) {
-        return r -> r instanceof ProcessingRecipe<?> processingRecipe && !processingRecipe.getFluidIngredients().isEmpty()
-                && processingRecipe.getFluidIngredients().get(0).test(fluidStack);
-    }
+
 
     public void start(ItemStack inserted) {
         if (inventory.isEmpty())
@@ -232,7 +214,6 @@ public class DipperBlockEntity extends KineticBlockEntity {
         compound.putInt("ProcessingTicks", this.processingTicks);
         NBTHelper.writeEnum(compound, "State", state);
         compound.put("Grate", grateProgress.writeNBT());
-
         super.write(compound, clientPacket);
     }
 

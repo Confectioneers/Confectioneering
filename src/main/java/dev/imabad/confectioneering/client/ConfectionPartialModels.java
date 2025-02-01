@@ -7,6 +7,7 @@ public class ConfectionPartialModels {
 
     public static final PartialModel DIPPER_GRATE = block("dipper/grate");
     public static final PartialModel DIPPER_AXLE = block("dipper/axle");
+    public static final PartialModel ENROBER_AXLE = block("enrober/axle");
 
     public static final PartialModel LARGE_CARDBOARD_BOX_LID_SIDE = block("large_cardboard_box/lid");
 

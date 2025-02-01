@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "amount": 100,
+      "fluid": "create:chocolate",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "fluid": "confectioneering:dark_chocolate"
+    }
+  ]
+}

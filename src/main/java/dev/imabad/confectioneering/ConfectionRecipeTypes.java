@@ -1,18 +1,16 @@
 package dev.imabad.confectioneering;
 
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Lang;
-import dev.imabad.confectioneering.data.ConfectionRecipes;
 import dev.imabad.confectioneering.machines.dipper.DippingRecipe;
+import dev.imabad.confectioneering.machines.enrober.EnrobingRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,7 +22,8 @@ import java.util.function.Supplier;
 public enum ConfectionRecipeTypes implements IRecipeTypeInfo {
 
 
-    DIPPING(DippingRecipe::new);
+    DIPPING(DippingRecipe::new),
+    ENROBING(EnrobingRecipe::new);
 
 
     private final ResourceLocation id;

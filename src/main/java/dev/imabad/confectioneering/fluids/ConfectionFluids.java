@@ -2,10 +2,8 @@ package dev.imabad.confectioneering.fluids;
 
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.imabad.confectioneering.Confectioneering;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -18,20 +16,21 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ConfectionFluids {
 
     public static final CreateRegistrate REGISTRATE = Confectioneering.registrate();
+    private static final ResourceLocation FLAVOURED_GLOOPY_STILL_TEXTURE = new ResourceLocation(Confectioneering.MOD_ID, "fluid/flavoured_gloopy_icing_still");
+    private static final ResourceLocation FLAVOURED_GLOOPY_FLOW_TEXTURE = new ResourceLocation(Confectioneering.MOD_ID, "fluid/flavoured_gloopy_icing_flow");
 
     private static FluidBuilder<ForgeFlowingFluid.Flowing, CreateRegistrate> basicFluid(String name) {
-        return REGISTRATE.fluid(name, Confectioneering.location("block/" + name + "_still"), Confectioneering.location("block/" + name + "_flow"));
+        return REGISTRATE.standardFluid(name, SolidRenderedFluidType.create());
     }
     private static FluidBuilder<ForgeFlowingFluid.Flowing, CreateRegistrate> tintedBasicFluid(DyeColor color, String name) {
-        return REGISTRATE.fluid(name, Confectioneering.location("block/flavoured_gloopy_icing_still"), Confectioneering.location("block/flavoured_gloopy_icing_flow"), DyedFluidAttributes.create(color));
+        return REGISTRATE.fluid(name, FLAVOURED_GLOOPY_STILL_TEXTURE, FLAVOURED_GLOOPY_FLOW_TEXTURE,
+                DyedFluidAttributes.create(color));
     }
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> GLOOPY_ICING = basicFluid("gloopy_icing")
@@ -55,6 +54,26 @@ public class ConfectionFluids {
             .register();
 
     public static final Map<DyeColor, FluidEntry<ForgeFlowingFluid.Flowing>> COLOURED_FLAVOURED_ICING_FLUIDS = new HashMap<>();
+
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> WHITE_CHOCOLATE = basicFluid("white_chocolate")
+            .properties(b -> b.viscosity(1500)
+                    .density(1400))
+            .fluidProperties(p -> p.levelDecreasePerBlock(2)
+                    .tickRate(25)
+                    .slopeFindDistance(3)
+                    .explosionResistance(100f))
+            .lang("White Chocolate")
+            .register();
+
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> DARK_CHOCOLATE = basicFluid("dark_chocolate")
+            .properties(b -> b.viscosity(1500)
+                    .density(1400))
+            .fluidProperties(p -> p.levelDecreasePerBlock(2)
+                    .tickRate(25)
+                    .slopeFindDistance(3)
+                    .explosionResistance(100f))
+            .lang("Dark Chocolate")
+            .register();
 
     private static class DyedFluidAttributes extends AllFluids.TintedFluidType {
 
@@ -80,6 +99,29 @@ public class ConfectionFluids {
         @Override
         protected int getTintColor(FluidState fluidState, BlockAndTintGetter blockAndTintGetter, BlockPos blockPos) {
             return dyeColor.getFireworkColor();
+        }
+    }
+
+    private static class SolidRenderedFluidType extends AllFluids.TintedFluidType {
+
+        public static FluidBuilder.FluidTypeFactory create() {
+            return SolidRenderedFluidType::new;
+        }
+
+        public SolidRenderedFluidType(Properties properties,
+                                   ResourceLocation stillTexture,
+                                   ResourceLocation flowingTexture) {
+            super(properties, stillTexture, flowingTexture);
+        }
+
+        @Override
+        protected int getTintColor(FluidStack fluidStack) {
+            return NO_TINT;
+        }
+
+        @Override
+        protected int getTintColor(FluidState fluidState, BlockAndTintGetter blockAndTintGetter, BlockPos blockPos) {
+            return 0x00ffffff;
         }
     }
 
