@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smoking",
+  "category": "food",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "ingredient": {
+    "item": "confectioneering:finger_cut_biscuit_dough"
+  },
+  "result": "confectioneering:finger_cut_biscuit"
+}

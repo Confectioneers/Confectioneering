@@ -34,4 +34,7 @@ public class ConfectionRecipes {
     public static ProcessingRecipeBuilder<?> dipping(String path) {
         return processing(ConfectionRecipeTypes.DIPPING, Confectioneering.location(path));
     }
+    public static ProcessingRecipeBuilder<?> enrobing(String path) {
+        return processing(ConfectionRecipeTypes.ENROBING, Confectioneering.location(path));
+    }
 }

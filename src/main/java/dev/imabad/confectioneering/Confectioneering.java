@@ -1,5 +1,6 @@
 package dev.imabad.confectioneering;
 
+import com.simibubi.create.AllFluids;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -16,9 +17,11 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.DistExecutor;
@@ -73,6 +76,17 @@ public class Confectioneering {
                                 .output(flowingFluidEntry.get(), 100)
                                 .build(registrateRecipeProvider);
                     }
+
+                    ConfectionRecipes.mixing("white_chocolate")
+                            .require(Tags.Fluids.MILK, 100)
+                            .require(AllFluids.CHOCOLATE.get(), 100)
+                            .output(ConfectionFluids.WHITE_CHOCOLATE.get(), 100)
+                            .build(registrateRecipeProvider);
+                    ConfectionRecipes.mixing("dark_chocolate")
+                            .require(Items.COCOA_BEANS)
+                            .require(AllFluids.CHOCOLATE.get(), 100)
+                            .output(ConfectionFluids.DARK_CHOCOLATE.get(), 100)
+                            .build(registrateRecipeProvider);
                 }).addDataGenerator(ProviderType.LANG, (lang) -> {
                     lang.add(MOD_ID + ".recipe.assembly.dipping_dip_fluid", "Dip %1$s");
                 });

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "confectioneering:block/enrober/block",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "confectioneering:block/enrober/block"
+    },
+    "facing=south": {
+      "model": "confectioneering:block/enrober/block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "confectioneering:block/enrober/block",
+      "y": 270
+    }
+  }
+}
