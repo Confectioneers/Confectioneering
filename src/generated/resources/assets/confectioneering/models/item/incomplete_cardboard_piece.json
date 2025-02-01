@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "confectioneering:item/incomplete_cardboard_piece"
-  }
-}

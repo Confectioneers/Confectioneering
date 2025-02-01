@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "confectioneering:block/gloopy_icing_still"
+    "particle": "confectioneering:fluid/gloopy_icing_still"
   }
 }

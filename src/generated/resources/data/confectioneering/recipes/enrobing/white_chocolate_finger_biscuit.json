@@ -1,0 +1,18 @@
+{
+  "type": "confectioneering:enrobing",
+  "ingredients": [
+    {
+      "item": "confectioneering:finger_cut_biscuit"
+    },
+    {
+      "amount": 50,
+      "fluid": "confectioneering:white_chocolate",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "confectioneering:white_chocolate_finger_biscuit"
+    }
+  ]
+}

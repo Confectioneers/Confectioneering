@@ -1,17 +1,11 @@
 package dev.imabad.confectioneering.items;
 
-import com.google.common.collect.ImmutableList;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
+import com.simibubi.create.AllFluids;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
-import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
 import com.simibubi.create.content.kinetics.press.PressingRecipe;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyItem;
 import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipeBuilder;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.recipe.MechanicalCraftingRecipeBuilder;
-import com.tterrag.registrate.Registrate;
-import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
@@ -27,11 +21,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -96,6 +88,20 @@ public class ConfectionItems {
             )
             .register();
 
+    public static final RegistryEntry<Item> FINGER_BISCUIT_CUTTER = REGISTRATE.item("finger_biscuit_cutter", Item::new)
+            .defaultModel()
+            .lang("Finger Biscuit Cutter")
+            .recipe((c, p) ->
+                    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, c.get())
+                            .pattern("CCC")
+                            .pattern("C C")
+                            .pattern("CCC")
+                            .define('C', forgeItemTag("ingots/iron"))
+                            .unlockedBy("has_finger_biscuit_cutter", RegistrateRecipeProvider.has(c.get()))
+                            .save(p)
+            )
+            .register();
+
     public static final RegistryEntry<Item> RINGED_CUT_BISCUIT_DOUGH = REGISTRATE.item("ringed_cut_biscuit_dough", Item::new)
             .defaultModel()
             .lang("Ringed Cut Biscuit Dough")
@@ -104,6 +110,17 @@ public class ConfectionItems {
                     .require(RINGED_BISCUIT_CUTTER.get())
                     .toolNotConsumed()
                     .output(c.get(), 4)
+                    .build(p))
+            .register();
+
+    public static final RegistryEntry<Item> FINGER_CUT_BISCUIT_DOUGH = REGISTRATE.item("finger_cut_biscuit_dough", Item::new)
+            .defaultModel()
+            .lang("Finger Cut Biscuit Dough")
+            .recipe((c, p) -> ConfectionRecipes.deploying("finger_cut_biscuit_dough")
+                    .require(FLAT_BISCUIT_DOUGH.get())
+                    .require(RINGED_CUT_BISCUIT_DOUGH.get())
+                    .toolNotConsumed()
+                    .output(c.get(), 6)
                     .build(p))
             .register();
 
@@ -116,6 +133,15 @@ public class ConfectionItems {
                     .save(p))
             .register();
 
+
+    public static final RegistryEntry<Item> FINGER_CUT_BISCUIT = REGISTRATE.item("finger_cut_biscuit", Item::new)
+            .defaultModel()
+            .lang("Finger Cut Biscuit")
+            .recipe((c, p) -> SimpleCookingRecipeBuilder
+                    .smoking(Ingredient.of(FINGER_CUT_BISCUIT_DOUGH.get()), RecipeCategory.FOOD, c.get(), 0, 100)
+                    .unlockedBy("has_flour", RegistrateRecipeProvider.has(forgeItemTag("flour/wheat")))
+                    .save(p))
+            .register();
 
     public static final RegistryEntry<Item> ICING_SUGAR = REGISTRATE.item("icing_sugar", Item::new)
             .defaultModel()
@@ -147,6 +173,56 @@ public class ConfectionItems {
                     .build()))
                     .lang(item.getName()+ " Party Ring")
                     .register()));
+
+
+    public static final RegistryEntry<Item> CHOCOLATE_FINGER_BISCUIT = REGISTRATE.item("chocolate_finger_biscuit", Item::new)
+            .defaultModel()
+            .properties(p -> p.food(new FoodProperties.Builder().nutrition(2)
+                    .alwaysEat()
+                    .saturationMod(0.8F)
+                    .build()))
+            .recipe((ctx, registrate) -> {
+                ConfectionRecipes.enrobing("chocolate_finger_biscuit")
+                        .require(AllFluids.CHOCOLATE.get(), 50)
+                        .require(FINGER_CUT_BISCUIT.get())
+                        .output(ctx.get(), 1)
+                        .build(registrate);
+            })
+            .lang("Chocolate Finger Biscuit")
+            .register();
+
+    public static final RegistryEntry<Item> WHITE_CHOCOLATE_FINGER_BISCUIT = REGISTRATE.item("white_chocolate_finger_biscuit", Item::new)
+            .defaultModel()
+            .properties(p -> p.food(new FoodProperties.Builder().nutrition(2)
+                    .alwaysEat()
+                    .saturationMod(0.8F)
+                    .build()))
+            .recipe((ctx, registrate) -> {
+                ConfectionRecipes.enrobing("white_chocolate_finger_biscuit")
+                        .require(ConfectionFluids.WHITE_CHOCOLATE.get(), 50)
+                        .require(FINGER_CUT_BISCUIT.get())
+                        .output(ctx.get(), 1)
+                        .build(registrate);
+            })
+            .lang("White Chocolate Finger Biscuit")
+            .register();
+
+
+    public static final RegistryEntry<Item> DARK_CHOCOLATE_FINGER_BISCUIT = REGISTRATE.item("dark_chocolate_finger_biscuit", Item::new)
+            .defaultModel()
+            .properties(p -> p.food(new FoodProperties.Builder().nutrition(2)
+                    .alwaysEat()
+                    .saturationMod(0.8F)
+                    .build()))
+            .recipe((ctx, registrate) -> {
+                ConfectionRecipes.enrobing("dark_chocolate_finger_biscuit")
+                        .require(ConfectionFluids.DARK_CHOCOLATE.get(), 50)
+                        .require(FINGER_CUT_BISCUIT.get())
+                        .output(ctx.get(), 1)
+                        .build(registrate);
+            })
+            .lang("Dark Chocolate Finger Biscuit")
+            .register();
 
     public static final List<RegistryEntry<SequencedAssemblyItem>> ICED_RINGS = Arrays.stream(PartyRingColours.values())
             .map(partyRingColours ->

@@ -5,6 +5,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
     id "me.modmuss50.mod-publish-plugin" version "0.8.3"
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = mod_version
@@ -78,6 +79,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // Create + Registrate
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
@@ -102,6 +104,14 @@ tasks.named('processResources', ProcessResources).configure {
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
+}
+
+mixin {
+    // MixinGradle Settings
+    add sourceSets.main, 'mixins.confectioneering.refmap.json'
+    config 'mixins.confectioneering.json'
+    debug.verbose = true
+    debug.export = true
 }
 
 tasks.named('jar', Jar).configure {

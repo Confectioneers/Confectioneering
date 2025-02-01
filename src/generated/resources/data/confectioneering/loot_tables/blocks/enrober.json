@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "confectioneering:large_cardboard_box"
+          "name": "confectioneering:enrober"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "confectioneering:blocks/large_cardboard_box"
+  "random_sequence": "confectioneering:blocks/enrober"
 }
