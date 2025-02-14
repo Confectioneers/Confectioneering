@@ -20,6 +20,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.MapColor;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 
 public class ConfectionMachines {
     public static final CreateRegistrate REGISTRATE = Confectioneering.registrate();
@@ -32,6 +33,7 @@ public class ConfectionMachines {
             .item()
             .transform(customItemModel())
             .transform(BlockStressDefaults.setImpact(2.0))
+            .transform(pickaxeOnly())
             .lang("Mechanical Dipper")
             .recipe((blockDipperBlockDataGenContext, registrateRecipeProvider) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.MISC, blockDipperBlockDataGenContext.get())

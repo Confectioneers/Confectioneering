@@ -1,9 +1,6 @@
 package dev.imabad.confectioneering.machines.dipper;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllShapes;
-import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.Create;
+import com.simibubi.create.*;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.drain.ItemDrainBlockEntity;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
@@ -86,7 +83,7 @@ public class DipperBlock extends HorizontalKineticBlock implements IWrenchable, 
                 return InteractionResult.SUCCESS;
 
             boolean wasEmptyHanded = heldItem.isEmpty();
-            boolean shouldntPlaceItem = AllBlocks.MECHANICAL_ARM.isIn(heldItem);
+            boolean shouldntPlaceItem = AllBlocks.MECHANICAL_ARM.isIn(heldItem) || AllItems.WRENCH.isIn(heldItem);
 
             ItemStack mainItemStack = be.inventory.getStackInSlot(0);
             if (!mainItemStack.isEmpty()) {
@@ -104,6 +101,9 @@ public class DipperBlock extends HorizontalKineticBlock implements IWrenchable, 
             if (!wasEmptyHanded && !shouldntPlaceItem) {
                 ItemStack returned = be.inventory.insertItem(0, heldItem, false);
                 player.setItemInHand(handIn, returned);
+            }
+            if(!wasEmptyHanded && shouldntPlaceItem){
+                return InteractionResult.PASS;
             }
 
             be.notifyUpdate();

@@ -164,11 +164,9 @@ public class DipperBlockEntity extends KineticBlockEntity {
                 .filter(fluidMatches(internalTank.getPrimaryHandler().getFluid()))
                 .filter(r -> !AllRecipeTypes.shouldIgnoreInAutomation(r))
                 .collect(Collectors.toList());
-        Optional<DippingRecipe> assemblyRecipe =
-                SequencedAssemblyRecipe.getRecipe(level, inventory.getStackInSlot(0), ConfectionRecipeTypes.DIPPING.getType(), DippingRecipe.class);
-        if(assemblyRecipe.isPresent()){
-            startedSearch.add(assemblyRecipe.get());
-        }
+        List<DippingRecipe> collect = SequencedAssemblyRecipe.getRecipes(level, inventory.getStackInSlot(0), ConfectionRecipeTypes.DIPPING.getType(), DippingRecipe.class)
+                .filter(fluidMatches(internalTank.getPrimaryHandler().getFluid())).toList();
+        startedSearch.addAll(collect);
         return startedSearch;
     }
 
