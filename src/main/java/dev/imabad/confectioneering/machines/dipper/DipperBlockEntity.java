@@ -150,12 +150,10 @@ public class DipperBlockEntity extends KineticBlockEntity {
                 .filter(r -> !AllRecipeTypes.shouldIgnoreInAutomation(r))
                 .collect(Collectors.toList());
         List<DippingRecipe> collect = SequencedAssemblyRecipe.getRecipes(level, inventory.getStackInSlot(0), ConfectionRecipeTypes.DIPPING.getType(), DippingRecipe.class)
-                .filter(fluidMatches(internalTank.getPrimaryHandler().getFluid())).toList();
+                .filter(RecipeUtils.fluidMatches(internalTank.getPrimaryHandler().getFluid())).toList();
         startedSearch.addAll(collect);
         return startedSearch;
     }
-
-
 
     public void start(ItemStack inserted) {
         if (inventory.isEmpty())
@@ -178,11 +176,6 @@ public class DipperBlockEntity extends KineticBlockEntity {
             if(recipeIndex >= recipes.size())
                 recipeIndex = 0;
         }
-
-        Recipe<?> recipe = recipes.get(recipeIndex);
-//        if(recipe instanceof DippingRecipe dippingRecipe){
-//            time = dippingRecipe.getProcessingDuration();
-//        }
 
         inventory.remainingTime = time * Math.max(1, (inserted.getCount() / 5));
         inventory.recipeDuration = inventory.remainingTime;

@@ -1,5 +1,6 @@
 package dev.imabad.confectioneering.event;
 
+import dev.imabad.confectioneering.content.PartyRingsFeature;
 import dev.imabad.confectioneering.items.ConfectionItems;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.world.entity.npc.VillagerProfession;
@@ -21,7 +22,12 @@ public class VillagerTradeEvents {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
             trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 2),
-                    new ItemStack(ConfectionItems.RINGED_BISCUIT_CUTTER.get(), 1),
+                    new ItemStack(PartyRingsFeature.RINGED_BISCUIT_CUTTER.get(), 1),
+                    10, 8, 0.02f
+            ));
+            trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 2),
+                    new ItemStack(PartyRingsFeature.RINGED_BISCUIT_CUTTER.get(), 1),
                     10, 8, 0.02f
             ));
         }

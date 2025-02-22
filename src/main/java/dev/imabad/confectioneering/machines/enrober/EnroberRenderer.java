@@ -34,6 +34,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
+import org.joml.Quaternionf;
 
 public class EnroberRenderer extends SafeBlockEntityRenderer<EnroberBlockEntity> {
     static final Vec3 pivot = VecHelper.voxelSpace(0, 11.25, 0.75);
@@ -59,12 +60,14 @@ public class EnroberRenderer extends SafeBlockEntityRenderer<EnroberBlockEntity>
 //                    .renderInto(ms, vertexBuilder);
 //        }
         TransformStack msr = TransformStack.cast(ms);
-
+        msr.centre()
+            .rotateY(AngleHelper.horizontalAngle(be.getBlockState()
+                            .getValue(EnroberBlock.HORIZONTAL_FACING)) + 90f)
+                    .unCentre();
+//        ms.translate(0.5, 0.5, 0.5);
+//        ms.mulPose(Axis.YP.rotationDegrees()));
+//        ms.translate(-0.5, -0.5, -0.5);
         renderFluid(be, partialTicks, ms, buffer, light);
-//        msr.centre()
-//                .rotateY(-180 + AngleHelper.horizontalAngle(be.getBlockState()
-//                        .getValue(DipperBlock.HORIZONTAL_FACING)))
-//                .unCentre();
 //        renderItem(be, partialTicks, yOffset, angle, ms, buffer, light, overlay);
     }
 

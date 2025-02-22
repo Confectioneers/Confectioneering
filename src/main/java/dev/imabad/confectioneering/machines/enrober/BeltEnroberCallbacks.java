@@ -1,23 +1,11 @@
 package dev.imabad.confectioneering.machines.enrober;
 
-import com.simibubi.create.AllSoundEvents;
-import com.simibubi.create.Create;
-import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
 import com.simibubi.create.content.kinetics.belt.BeltHelper;
 import com.simibubi.create.content.kinetics.belt.behaviour.BeltProcessingBehaviour;
 import com.simibubi.create.content.kinetics.belt.behaviour.TransportedItemStackHandlerBehaviour;
 import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
-import com.simibubi.create.content.kinetics.deployer.DeployerBlockEntity;
-import com.simibubi.create.content.kinetics.deployer.ItemApplicationRecipe;
-import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.recipe.RecipeApplier;
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.List;
@@ -29,7 +17,7 @@ public class BeltEnroberCallbacks {
         if(blockEntity.internalTank.isEmpty()){
             return BeltProcessingBehaviour.ProcessingResult.HOLD;
         }
-        if(blockEntity.getRecipe(s.stack) == null){
+        if(blockEntity.getRecipes(s.stack).isEmpty()){
             return BeltProcessingBehaviour.ProcessingResult.PASS;
         }
 
@@ -41,9 +29,10 @@ public class BeltEnroberCallbacks {
                                                                         EnroberBlockEntity blockEntity) {
         if (blockEntity.internalTank.isEmpty())
             return BeltProcessingBehaviour.ProcessingResult.HOLD;
-        Recipe<?> recipe = blockEntity.getRecipe(s.stack);
-        if (recipe == null)
+        List<? extends Recipe<?>> recipes = blockEntity.getRecipes(s.stack);
+        if (recipes.isEmpty())
             return BeltProcessingBehaviour.ProcessingResult.PASS;
+        Recipe<?> recipe = recipes.get(0);
 
         activate(s, i, blockEntity, recipe);
         return BeltProcessingBehaviour.ProcessingResult.HOLD;
@@ -60,13 +49,10 @@ public class BeltEnroberCallbacks {
                             boolean centered = BeltHelper.isItemUpright(stack);
                             copy.stack = stack;
                             copy.locked = true;
-                            copy.angle = centered ? 180 : Create.RANDOM.nextInt(360);
+                            copy.angle = centered ? 180 : blockEntity.getLevel().getRandom().nextInt(360);
                             return copy;
                         })
-                        .map(t -> {
-                            t.locked = false;
-                            return t;
-                        })
+                        .peek(t -> t.locked = false)
                         .collect(Collectors.toList());
 
         TransportedItemStack left = transported.copy();

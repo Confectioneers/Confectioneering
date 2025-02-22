@@ -7,6 +7,8 @@ import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.imabad.confectioneering.blocks.ConfectionBlocks;
 import dev.imabad.confectioneering.client.ConfectioneeringClient;
+import dev.imabad.confectioneering.content.ChocolateFingersFeature;
+import dev.imabad.confectioneering.content.PartyRingsFeature;
 import dev.imabad.confectioneering.data.ConfectionRecipes;
 import dev.imabad.confectioneering.event.VillagerTradeEvents;
 import dev.imabad.confectioneering.fluids.ConfectionFluids;
@@ -96,6 +98,9 @@ public class Confectioneering {
         ConfectionFluids.init();
         ConfectionMachines.init();
         forgeEventBus.register(VillagerTradeEvents.class);
+
+        PartyRingsFeature.init();
+        ChocolateFingersFeature.init();
 
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ConfectioneeringClient.clientConstruct(modEventBus, forgeEventBus));
     }

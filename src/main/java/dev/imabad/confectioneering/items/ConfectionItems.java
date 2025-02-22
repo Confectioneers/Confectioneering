@@ -74,75 +74,6 @@ public class ConfectionItems {
                     .build(p))
             .register();
 
-    public static final RegistryEntry<Item> RINGED_BISCUIT_CUTTER = REGISTRATE.item("ringed_biscuit_cutter", Item::new)
-            .defaultModel()
-            .lang("Ringed Biscuit Cutter")
-            .recipe((c, p) ->
-                    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, c.get())
-                            .pattern(" C ")
-                            .pattern("C C")
-                            .pattern(" C ")
-                            .define('C', forgeItemTag("ingots/iron"))
-                            .unlockedBy("has_ringed_biscuit_cutter", RegistrateRecipeProvider.has(c.get()))
-                            .save(p)
-            )
-            .register();
-
-    public static final RegistryEntry<Item> FINGER_BISCUIT_CUTTER = REGISTRATE.item("finger_biscuit_cutter", Item::new)
-            .defaultModel()
-            .lang("Finger Biscuit Cutter")
-            .recipe((c, p) ->
-                    ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, c.get())
-                            .pattern("CCC")
-                            .pattern("C C")
-                            .pattern("CCC")
-                            .define('C', forgeItemTag("ingots/iron"))
-                            .unlockedBy("has_finger_biscuit_cutter", RegistrateRecipeProvider.has(c.get()))
-                            .save(p)
-            )
-            .register();
-
-    public static final RegistryEntry<Item> RINGED_CUT_BISCUIT_DOUGH = REGISTRATE.item("ringed_cut_biscuit_dough", Item::new)
-            .defaultModel()
-            .lang("Ringed Cut Biscuit Dough")
-            .recipe((c, p) -> ConfectionRecipes.deploying("ringed_cut_biscuit_dough")
-                    .require(FLAT_BISCUIT_DOUGH.get())
-                    .require(RINGED_BISCUIT_CUTTER.get())
-                    .toolNotConsumed()
-                    .output(c.get(), 4)
-                    .build(p))
-            .register();
-
-    public static final RegistryEntry<Item> FINGER_CUT_BISCUIT_DOUGH = REGISTRATE.item("finger_cut_biscuit_dough", Item::new)
-            .defaultModel()
-            .lang("Finger Cut Biscuit Dough")
-            .recipe((c, p) -> ConfectionRecipes.deploying("finger_cut_biscuit_dough")
-                    .require(FLAT_BISCUIT_DOUGH.get())
-                    .require(RINGED_CUT_BISCUIT_DOUGH.get())
-                    .toolNotConsumed()
-                    .output(c.get(), 6)
-                    .build(p))
-            .register();
-
-    public static final RegistryEntry<Item> RINGED_CUT_BISCUIT = REGISTRATE.item("ringed_cut_biscuit", Item::new)
-            .defaultModel()
-            .lang("Ringed Cut Biscuit")
-            .recipe((c, p) -> SimpleCookingRecipeBuilder
-                    .smoking(Ingredient.of(RINGED_CUT_BISCUIT_DOUGH.get()), RecipeCategory.FOOD, c.get(), 0, 100)
-                    .unlockedBy("has_flour", RegistrateRecipeProvider.has(forgeItemTag("flour/wheat")))
-                    .save(p))
-            .register();
-
-
-    public static final RegistryEntry<Item> FINGER_CUT_BISCUIT = REGISTRATE.item("finger_cut_biscuit", Item::new)
-            .defaultModel()
-            .lang("Finger Cut Biscuit")
-            .recipe((c, p) -> SimpleCookingRecipeBuilder
-                    .smoking(Ingredient.of(FINGER_CUT_BISCUIT_DOUGH.get()), RecipeCategory.FOOD, c.get(), 0, 100)
-                    .unlockedBy("has_flour", RegistrateRecipeProvider.has(forgeItemTag("flour/wheat")))
-                    .save(p))
-            .register();
-
     public static final RegistryEntry<Item> ICING_SUGAR = REGISTRATE.item("icing_sugar", Item::new)
             .defaultModel()
             .lang("Icing Sugar")
@@ -163,85 +94,6 @@ public class ConfectionItems {
                             .output(c.get(), 1)
                             .build(p))
             .register();
-
-    public static final Map<PartyRingColours, RegistryEntry<Item>> PARTY_RINGS = Arrays.stream(PartyRingColours.values())
-            .collect(Collectors.toMap(Function.identity(), item -> REGISTRATE.item(item.getName().toLowerCase() + "_party_ring", Item::new)
-                    .defaultModel()
-                    .properties(p -> p.food(new FoodProperties.Builder().nutrition(2)
-                                    .alwaysEat()
-                            .saturationMod(0.8F)
-                    .build()))
-                    .lang(item.getName()+ " Party Ring")
-                    .register()));
-
-
-    public static final RegistryEntry<Item> CHOCOLATE_FINGER_BISCUIT = REGISTRATE.item("chocolate_finger_biscuit", Item::new)
-            .defaultModel()
-            .properties(p -> p.food(new FoodProperties.Builder().nutrition(2)
-                    .alwaysEat()
-                    .saturationMod(0.8F)
-                    .build()))
-            .recipe((ctx, registrate) -> {
-                ConfectionRecipes.enrobing("chocolate_finger_biscuit")
-                        .require(AllFluids.CHOCOLATE.get(), 50)
-                        .require(FINGER_CUT_BISCUIT.get())
-                        .output(ctx.get(), 1)
-                        .build(registrate);
-            })
-            .lang("Chocolate Finger Biscuit")
-            .register();
-
-    public static final RegistryEntry<Item> WHITE_CHOCOLATE_FINGER_BISCUIT = REGISTRATE.item("white_chocolate_finger_biscuit", Item::new)
-            .defaultModel()
-            .properties(p -> p.food(new FoodProperties.Builder().nutrition(2)
-                    .alwaysEat()
-                    .saturationMod(0.8F)
-                    .build()))
-            .recipe((ctx, registrate) -> {
-                ConfectionRecipes.enrobing("white_chocolate_finger_biscuit")
-                        .require(ConfectionFluids.WHITE_CHOCOLATE.get(), 50)
-                        .require(FINGER_CUT_BISCUIT.get())
-                        .output(ctx.get(), 1)
-                        .build(registrate);
-            })
-            .lang("White Chocolate Finger Biscuit")
-            .register();
-
-
-    public static final RegistryEntry<Item> DARK_CHOCOLATE_FINGER_BISCUIT = REGISTRATE.item("dark_chocolate_finger_biscuit", Item::new)
-            .defaultModel()
-            .properties(p -> p.food(new FoodProperties.Builder().nutrition(2)
-                    .alwaysEat()
-                    .saturationMod(0.8F)
-                    .build()))
-            .recipe((ctx, registrate) -> {
-                ConfectionRecipes.enrobing("dark_chocolate_finger_biscuit")
-                        .require(ConfectionFluids.DARK_CHOCOLATE.get(), 50)
-                        .require(FINGER_CUT_BISCUIT.get())
-                        .output(ctx.get(), 1)
-                        .build(registrate);
-            })
-            .lang("Dark Chocolate Finger Biscuit")
-            .register();
-
-    public static final List<RegistryEntry<SequencedAssemblyItem>> ICED_RINGS = Arrays.stream(PartyRingColours.values())
-            .map(partyRingColours ->
-                    REGISTRATE.item(partyRingColours.getName().toLowerCase() + "_iced_ringed_biscuit", SequencedAssemblyItem::new)
-                            .defaultModel()
-                            .lang(partyRingColours.getName()+ " Iced Ringed Biscuit")
-                            .recipe((c, p) -> {
-                                new SequencedAssemblyRecipeBuilder(new ResourceLocation(Confectioneering.MOD_ID, partyRingColours.getName().toLowerCase() + "_iced_ringed_biscuit"))
-                                        .require(RINGED_CUT_BISCUIT.get())
-                                        .transitionTo(c.get())
-                                        .addOutput(PARTY_RINGS.get(partyRingColours).get(), 1)
-                                        .loops(1)
-                                        .addStep(DippingRecipe::new, rb -> rb.require(ConfectionFluids.COLOURED_FLAVOURED_ICING_FLUIDS.get(partyRingColours.getDyeColor()).get(), 100))
-                                        .addStep(FillingRecipe::new, rb -> rb.require(ConfectionFluids.COLOURED_FLAVOURED_ICING_FLUIDS.get(partyRingColours.getSecondaryColor()).get(), 50))
-                                        .addStep(PressingRecipe::new, rb -> rb)
-                                        .build(p);
-                            })
-                            .register()).collect(Collectors.toUnmodifiableList());
-
 
 //    public static final RegistryEntry<SequencedAssemblyItem> INCOMPLETE_CARDBOARD_PIECE = REGISTRATE.item("incomplete_cardboard_piece", SequencedAssemblyItem::new)
 //            .defaultModel()
@@ -300,19 +152,19 @@ public class ConfectionItems {
 //            })
 //            .register();
 
-    private static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry, ResourceLocation id) {
+    public static <T> TagKey<T> optionalTag(IForgeRegistry<T> registry, ResourceLocation id) {
         return registry.tags().createOptionalTagKey(id, Collections.emptySet());
     }
 
-    private static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path){
+    public static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path){
         return optionalTag(registry, new ResourceLocation("forge", path));
     }
 
-    private static TagKey<Item> forgeItemTag(String path) {
+    public static TagKey<Item> forgeItemTag(String path) {
         return forgeTag(ForgeRegistries.ITEMS, path);
     }
 
-    private static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags){
+    public static ItemEntry<Item> taggedIngredient(String name, TagKey<Item>... tags){
         return REGISTRATE.item(name, Item::new)
                 .tag(tags)
                 .register();

@@ -5,6 +5,7 @@ import com.simibubi.create.AllShapes;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
+import com.simibubi.create.content.kinetics.base.HorizontalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.content.kinetics.belt.BeltBlock;
 import com.simibubi.create.content.kinetics.belt.BeltSlope;
@@ -69,7 +70,17 @@ public class EnroberBlock extends Block implements IWrenchable, IBE<EnroberBlock
     public BlockEntityType<EnroberBlockEntity> getBlockEntityType() {
         return ConfectionMachines.ENROBER_BLOCK_ENTITY.get();
     }
+    @Override
+    public BlockState getRotatedBlockState(BlockState originalState, Direction targetedFace) {
+        BlockState newState = originalState;
 
+        if (targetedFace.getAxis() == Direction.Axis.Y) {
+            if (originalState.hasProperty(HORIZONTAL_FACING))
+                return originalState.setValue(HORIZONTAL_FACING, originalState
+                        .getValue(HORIZONTAL_FACING).getClockWise(targetedFace.getAxis()));
+        }
+        return newState;
+    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

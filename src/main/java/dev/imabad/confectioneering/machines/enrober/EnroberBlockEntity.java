@@ -49,8 +49,7 @@ public class EnroberBlockEntity extends SmartBlockEntity {
         behaviours.add(this.internalTank = SmartFluidTankBehaviour.single(this, 200).allowInsertion());
     }
 
-    @Nullable
-    public Recipe<? extends Container> getRecipe(ItemStack stack) {
+    public List<? extends Recipe<?>> getRecipes(ItemStack stack) {
         Predicate<Recipe<?>> types = RecipeConditions.isOfType(ConfectionRecipeTypes.ENROBING.getType());
 
         List<Recipe<?>> startedSearch = RecipeFinder.get(enrobingRecipesKey, level, types);
@@ -59,15 +58,10 @@ public class EnroberBlockEntity extends SmartBlockEntity {
                 .filter(RecipeUtils.fluidMatches(internalTank.getPrimaryHandler().getFluid()))
                 .filter(r -> !AllRecipeTypes.shouldIgnoreInAutomation(r))
                 .collect(Collectors.toList());
-        Optional<EnrobingRecipe> assemblyRecipe =
-                SequencedAssemblyRecipe.getRecipe(level, stack, ConfectionRecipeTypes.ENROBING.getType(), EnrobingRecipe.class);
-        if(assemblyRecipe.isPresent()){
-            startedSearch.add(assemblyRecipe.get());
-        }
-        if(startedSearch.isEmpty()){
-            return null;
-        }
-        return startedSearch.get(0);
+        List<EnrobingRecipe> collect = SequencedAssemblyRecipe.getRecipes(level, stack, ConfectionRecipeTypes.ENROBING.getType(), EnrobingRecipe.class)
+                .filter(RecipeUtils.fluidMatches(internalTank.getPrimaryHandler().getFluid())).toList();
+        startedSearch.addAll(collect);
+        return startedSearch;
     }
 
 
