@@ -1,13 +1,14 @@
 package dev.imabad.confectioneering.machines.enrober;
 
-import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
-import com.simibubi.create.foundation.utility.AngleHelper;
-import com.simibubi.create.foundation.utility.VecHelper;
+import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
+import net.createmod.catnip.math.AngleHelper;
+import net.createmod.catnip.math.VecHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -43,11 +44,9 @@ public class EnroberRenderer extends SafeBlockEntityRenderer<EnroberBlockEntity>
 //            model.light(light)
 //                    .renderInto(ms, vertexBuilder);
 //        }
-        TransformStack msr = TransformStack.cast(ms);
-        msr.centre()
-            .rotateY(AngleHelper.horizontalAngle(be.getBlockState()
-                            .getValue(EnroberBlock.HORIZONTAL_FACING)) + 90f)
-                    .unCentre();
+        PoseTransformStack msr = TransformStack.of(ms);
+        msr.rotateYCenteredDegrees(AngleHelper.horizontalAngle(be.getBlockState()
+                    .getValue(EnroberBlock.HORIZONTAL_FACING)) + 90f);
 //        ms.translate(0.5, 0.5, 0.5);
 //        ms.mulPose(Axis.YP.rotationDegrees()));
 //        ms.translate(-0.5, -0.5, -0.5);

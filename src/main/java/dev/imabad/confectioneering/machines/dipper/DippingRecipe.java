@@ -6,7 +6,6 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.sequenced.IAssemblyRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
-import com.simibubi.create.foundation.utility.Components;
 import dev.imabad.confectioneering.ConfectionRecipeTypes;
 import dev.imabad.confectioneering.Confectioneering;
 import dev.imabad.confectioneering.compat.jei.AssemblyDipping;
@@ -59,8 +58,8 @@ public class DippingRecipe extends ProcessingRecipe<SmartInventory> implements I
         List<FluidStack> matchingFluidStacks = fluidIngredients.get(0)
                 .getMatchingFluidStacks();
         if (matchingFluidStacks.isEmpty())
-            return Components.literal("Invalid");
-        return Components.translatable(Confectioneering.MOD_ID + ".recipe.assembly.dipping_dip_fluid",
+            return Component.literal("Invalid");
+        return Component.translatable(Confectioneering.MOD_ID + ".recipe.assembly.dipping_dip_fluid",
                 matchingFluidStacks.get(0).getDisplayName().getString());
     }
 

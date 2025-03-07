@@ -3,9 +3,9 @@ package dev.imabad.confectioneering.compat.jei.animations;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
-import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import dev.imabad.confectioneering.client.ConfectionPartialModels;
 import dev.imabad.confectioneering.machines.ConfectionMachines;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.gui.GuiGraphics;
 
 public class AnimatedDipper extends AnimatedKinetics {
