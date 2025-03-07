@@ -1,6 +1,8 @@
-# 0.0.2 - A dipping good time
+# 0.0.3 - Chocolatey delights
 
-* Fix dipper not dipping
-* Make dipper rotatable with wrench
-* Give dipper texture a slight texture change to see which way its facing
-* Make dipper mine-able with a pickaxe
+* Add new chocolate finger biscuits
+  * Chocolate Finger Biscuits
+  * Dark Chocolate Finger Biscuits
+  * White Chocolate Finger Biscuits
+* Enrobing Machine 
+  * Used to cover the finger biscuits with a delicious chocolate layer
