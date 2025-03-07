@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-22T17:52:19.1126066	Registrate Provider for confectioneering [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.20.1	2025-03-07T17:32:15.7068203	Registrate Provider for confectioneering [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
 8a807d6bc3300a7ae994dab0a140c38fb0894c06 assets/confectioneering/blockstates/black_flavoured_gloopy_icing.json
 37ff686850153e410012c6c4706f5bb2b67d9ae1 assets/confectioneering/blockstates/blue_flavoured_gloopy_icing.json
 8d07ad9586349d77a5ba3969dab4dabb6efaf3c9 assets/confectioneering/blockstates/brown_flavoured_gloopy_icing.json
@@ -21,8 +21,8 @@ f4b4f2bd04cd1ef14b61964ae9ae154f8ce898cb assets/confectioneering/blockstates/red
 5b327f78fcaac1b57d551bc6e9100ec762d3d994 assets/confectioneering/blockstates/white_chocolate.json
 3670ae16ff7db5fa98b0dfa48aeafab2964e768a assets/confectioneering/blockstates/white_flavoured_gloopy_icing.json
 355551e6e5b3bbf6f581f5f4f4a186f7aad082bf assets/confectioneering/blockstates/yellow_flavoured_gloopy_icing.json
-a4e6684bb9aff11e31c5193402b92bd534324058 assets/confectioneering/lang/en_ud.json
-5c121c6fdae786eb36cdfc0cd9cb8fee2f2aaec3 assets/confectioneering/lang/en_us.json
+0dcf1697e6f47b4cbaeba7ca3a08c4bf47fd444e assets/confectioneering/lang/en_ud.json
+16f260a042fec32920b65ca7f4bbdb93e84e690b assets/confectioneering/lang/en_us.json
 b74c928bab753cdda54ea961e46da83ebb6e261f assets/confectioneering/models/block/black_flavoured_gloopy_icing.json
 b74c928bab753cdda54ea961e46da83ebb6e261f assets/confectioneering/models/block/blue_flavoured_gloopy_icing.json
 b74c928bab753cdda54ea961e46da83ebb6e261f assets/confectioneering/models/block/brown_flavoured_gloopy_icing.json

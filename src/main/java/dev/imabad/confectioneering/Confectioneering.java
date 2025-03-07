@@ -91,6 +91,7 @@ public class Confectioneering {
                             .build(registrateRecipeProvider);
                 }).addDataGenerator(ProviderType.LANG, (lang) -> {
                     lang.add(MOD_ID + ".recipe.assembly.dipping_dip_fluid", "Dip %1$s");
+                    lang.add(MOD_ID + ".recipe.enrobing", "Enrobing");
                 });
         ConfectionRecipeTypes.register(modEventBus);
         ConfectionItems.init();
