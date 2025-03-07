@@ -2,18 +2,19 @@ package dev.imabad.confectioneering.machines;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.infrastructure.config.CStress;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.imabad.confectioneering.Confectioneering;
+import dev.imabad.confectioneering.config.ConfectionStress;
 import dev.imabad.confectioneering.machines.dipper.DipperBlock;
 import dev.imabad.confectioneering.machines.dipper.DipperBlockEntity;
-import dev.imabad.confectioneering.machines.dipper.DipperInstance;
+import dev.imabad.confectioneering.machines.dipper.DipperVisual;
 import dev.imabad.confectioneering.machines.dipper.DipperRenderer;
 import dev.imabad.confectioneering.machines.enrober.*;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -34,7 +35,7 @@ public class ConfectionMachines {
             .blockstate((c, p) -> p.horizontalBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p), 180))
             .item()
             .transform(customItemModel())
-            .transform(BlockStressDefaults.setImpact(2.0))
+            .transform(ConfectionStress.setImpact(2.0))
             .transform(pickaxeOnly())
             .lang("Mechanical Dipper")
             .recipe((blockDipperBlockDataGenContext, registrateRecipeProvider) -> {
@@ -52,7 +53,7 @@ public class ConfectionMachines {
             .register();
 
     public static final BlockEntityEntry<DipperBlockEntity> DIPPER_BLOCK_ENTITY = REGISTRATE.blockEntity("dipper", DipperBlockEntity::new)
-            .instance(() -> DipperInstance::new)
+            .visual(() -> DipperVisual::new)
             .validBlock(DIPPER_BLOCK)
             .renderer(() -> DipperRenderer::new)
             .register();
@@ -63,7 +64,7 @@ public class ConfectionMachines {
             .blockstate((c, p) -> p.horizontalBlock(c.getEntry(), AssetLookup.partialBaseModel(c, p), 180))
             .item(EnroberItem::new)
             .transform(customItemModel())
-            .transform(BlockStressDefaults.setImpact(2.0))
+            .transform(ConfectionStress.setImpact(2.0))
             .lang("Enrobing Machine")
             .recipe((blockDipperBlockDataGenContext, registrateRecipeProvider) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.MISC, blockDipperBlockDataGenContext.get())
@@ -80,7 +81,6 @@ public class ConfectionMachines {
             .register();
 
     public static final BlockEntityEntry<EnroberBlockEntity> ENROBER_BLOCK_ENTITY = REGISTRATE.blockEntity("enrober", EnroberBlockEntity::new)
-            .instance(() -> EnroberInstance::new)
             .validBlock(ENROBER_BLOCK)
             .renderer(() -> EnroberRenderer::new)
             .register();

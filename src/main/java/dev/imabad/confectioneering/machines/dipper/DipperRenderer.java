@@ -1,38 +1,30 @@
 package dev.imabad.confectioneering.machines.dipper;
 
-import com.jozufozu.flywheel.backend.Backend;
-import com.jozufozu.flywheel.util.transform.Rotate;
-import com.jozufozu.flywheel.util.transform.TransformStack;
-import com.jozufozu.flywheel.util.transform.Translate;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.simibubi.create.content.fluids.drain.ItemDrainBlockEntity;
-import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.kinetics.base.ShaftRenderer;
-import com.simibubi.create.content.kinetics.belt.BeltHelper;
-import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
-import com.simibubi.create.content.logistics.depot.EjectorBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
-import com.simibubi.create.foundation.render.CachedBufferer;
-import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.utility.AngleHelper;
-import com.simibubi.create.foundation.utility.VecHelper;
+import dev.engine_room.flywheel.api.visualization.VisualizationManager;
+import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
+import dev.engine_room.flywheel.lib.transform.Rotate;
+import dev.engine_room.flywheel.lib.transform.TransformStack;
+import dev.engine_room.flywheel.lib.transform.Translate;
 import dev.imabad.confectioneering.client.ConfectionPartialModels;
+import net.createmod.catnip.math.AngleHelper;
+import net.createmod.catnip.math.VecHelper;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -52,8 +44,7 @@ public class DipperRenderer extends ShaftRenderer<DipperBlockEntity> {
 
     @Override
     protected void renderSafe(DipperBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
-        VertexConsumer vertexBuilder = buffer.getBuffer(RenderType.solid());
+        VertexConsumer vertexBuilder = buffer.getBuffer(RenderType.cutout());
         float grateProgress = be.getGrateProgress(partialTicks);
         DipperBlockEntity.State grateState = be.getState();
         float angle = 0;
@@ -64,19 +55,18 @@ public class DipperRenderer extends ShaftRenderer<DipperBlockEntity> {
             yOffset = grateProgress * be.getFluidLevel();
         }
 
-        if (!Backend.canUseInstancing(be.getLevel())) {
-            SuperByteBuffer model = CachedBufferer.partial(ConfectionPartialModels.DIPPER_GRATE, be.getBlockState());
+        if (!VisualizationManager.supportsVisualization(be.getLevel())) {
+            super.renderSafe(be, partialTicks, ms, buffer, light, overlay);
+            SuperByteBuffer model = CachedBuffers.partial(ConfectionPartialModels.DIPPER_GRATE, be.getBlockState());
             applyGrateAngle(be, angle, yOffset, model);
             model.light(light)
                     .renderInto(ms, vertexBuilder);
         }
-        TransformStack msr = TransformStack.cast(ms);
+        PoseTransformStack msr = TransformStack.of(ms);
 
         renderFluid(be, partialTicks, ms, buffer, light);
-        msr.centre()
-                .rotateY(-180 + AngleHelper.horizontalAngle(be.getBlockState()
-                        .getValue(DipperBlock.HORIZONTAL_FACING)))
-                .unCentre();
+        msr.rotateYCenteredDegrees(-180 + AngleHelper.horizontalAngle(be.getBlockState()
+                    .getValue(DipperBlock.HORIZONTAL_FACING)));
         renderItem(be, partialTicks, yOffset, angle, ms, buffer, light, overlay);
     }
 
@@ -85,13 +75,14 @@ public class DipperRenderer extends ShaftRenderer<DipperBlockEntity> {
     }
 
     static <T extends Translate<T> & Rotate<T>> void applyGrateAngle(KineticBlockEntity be, Vec3 rotationOffset, float angle, float yOffset, T tr) {
-        tr.centre()
-                .rotateY(180 + AngleHelper.horizontalAngle(be.getBlockState()
+        tr.center()
+                .rotateYDegrees(180 + AngleHelper.horizontalAngle(be.getBlockState()
                         .getValue(DipperBlock.HORIZONTAL_FACING)))
-                .unCentre()
+                .uncenter()
                 .translate(rotationOffset)
-                .rotateX(-angle)
-                .translateBack(rotationOffset).translateY(-yOffset);
+                .rotateXDegrees(-angle)
+                .translateBack(rotationOffset)
+                .translateY(-yOffset);
     }
 
     protected void renderItem(DipperBlockEntity be, float partialTicks, float yOffset, float angle, PoseStack ms, MultiBufferSource buffer,
@@ -144,8 +135,8 @@ public class DipperRenderer extends ShaftRenderer<DipperBlockEntity> {
             float yOffset = (7 / 16f) * level;
             ms.pushPose();
             ms.translate(0, yOffset, 0);
-            FluidRenderer.renderFluidBox(fluidStack, min, yMin - yOffset, min, max, yMin, max, buffer, ms, light,
-                    false);
+            FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), min, yMin - yOffset, min, max, yMin, max, buffer, ms, light,
+                    false, false);
             ms.popPose();
         }
     }

@@ -1,21 +1,16 @@
 package dev.imabad.confectioneering.machines.dipper;
 
 import com.simibubi.create.compat.jei.category.sequencedAssembly.SequencedAssemblySubCategory;
-import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.sequenced.IAssemblyRecipe;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.item.SmartInventory;
-import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Lang;
 import dev.imabad.confectioneering.ConfectionRecipeTypes;
 import dev.imabad.confectioneering.Confectioneering;
 import dev.imabad.confectioneering.compat.jei.AssemblyDipping;
 import dev.imabad.confectioneering.machines.ConfectionMachines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
@@ -63,8 +58,8 @@ public class DippingRecipe extends ProcessingRecipe<SmartInventory> implements I
         List<FluidStack> matchingFluidStacks = fluidIngredients.get(0)
                 .getMatchingFluidStacks();
         if (matchingFluidStacks.isEmpty())
-            return Components.literal("Invalid");
-        return Components.translatable(Confectioneering.MOD_ID + ".recipe.assembly.dipping_dip_fluid",
+            return Component.literal("Invalid");
+        return Component.translatable(Confectioneering.MOD_ID + ".recipe.assembly.dipping_dip_fluid",
                 matchingFluidStacks.get(0).getDisplayName().getString());
     }
 
