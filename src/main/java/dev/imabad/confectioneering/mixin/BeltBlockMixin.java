@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BeltBlock.class)
+@Mixin(value = BeltBlock.class, remap = false)
 public class BeltBlockMixin {
 
     @Inject(method = "isBlockCoveringBelt(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;)Z", at = @At("TAIL"), cancellable = true)

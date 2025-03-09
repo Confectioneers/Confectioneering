@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BeltProcessingBehaviour.class)
+@Mixin(value = BeltProcessingBehaviour.class, remap = false)
 public class BeltProcessingBehaviourMixin {
 
     @Inject(method = "isBlocked(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z", at=@At("HEAD"), cancellable = true)
