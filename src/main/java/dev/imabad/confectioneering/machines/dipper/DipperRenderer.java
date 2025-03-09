@@ -28,8 +28,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
 
-import java.util.Random;
-
 public class DipperRenderer extends ShaftRenderer<DipperBlockEntity> {
     static final Vec3 pivot = VecHelper.voxelSpace(0, 11.25, 0.75);
 

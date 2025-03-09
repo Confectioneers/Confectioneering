@@ -6,7 +6,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.content.kinetics.belt.BeltBlock;
 import com.simibubi.create.content.kinetics.belt.BeltPart;
-import dev.imabad.confectioneering.client.ConfectionPartialModels;
 import dev.imabad.confectioneering.machines.ConfectionMachines;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Direction;

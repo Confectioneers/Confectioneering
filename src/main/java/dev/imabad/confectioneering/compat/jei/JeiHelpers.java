@@ -10,7 +10,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 public class JeiHelpers {
