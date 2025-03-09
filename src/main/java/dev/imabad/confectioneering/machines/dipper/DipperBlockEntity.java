@@ -34,7 +34,6 @@ import net.minecraftforge.items.IItemHandler;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 

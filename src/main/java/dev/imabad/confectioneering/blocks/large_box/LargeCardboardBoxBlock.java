@@ -1,10 +1,8 @@
 package dev.imabad.confectioneering.blocks.large_box;
 
-import com.simibubi.create.AllShapes;
 import com.simibubi.create.foundation.block.IBE;
 import dev.imabad.confectioneering.blocks.ConfectionBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;

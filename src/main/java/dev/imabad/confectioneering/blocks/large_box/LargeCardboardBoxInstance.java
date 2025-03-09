@@ -6,8 +6,6 @@ import com.jozufozu.flywheel.backend.instancing.blockentity.BlockEntityInstance;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import dev.imabad.confectioneering.client.ConfectionPartialModels;
-import dev.imabad.confectioneering.machines.dipper.DipperBlockEntity;
-import dev.imabad.confectioneering.machines.dipper.DipperRenderer;
 import net.minecraft.util.Mth;
 
 public class LargeCardboardBoxInstance extends BlockEntityInstance<LargeCardboardBoxBlockEntity> implements DynamicInstance {

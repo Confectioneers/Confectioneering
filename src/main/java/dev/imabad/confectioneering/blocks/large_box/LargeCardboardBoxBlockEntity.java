@@ -1,6 +1,5 @@
 package dev.imabad.confectioneering.blocks.large_box;
 
-import com.simibubi.create.content.equipment.toolbox.ToolboxMenu;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.NBTHelper;

@@ -1,6 +1,5 @@
 package dev.imabad.confectioneering.machines.enrober;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.belt.BeltBlockEntity;
 import com.simibubi.create.content.kinetics.belt.BeltHelper;
 import dev.imabad.confectioneering.machines.ConfectionMachines;

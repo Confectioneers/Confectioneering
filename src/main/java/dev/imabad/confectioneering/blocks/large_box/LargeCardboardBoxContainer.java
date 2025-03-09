@@ -1,8 +1,5 @@
 package dev.imabad.confectioneering.blocks.large_box;
 
-import com.simibubi.create.AllMenuTypes;
-import com.simibubi.create.content.equipment.toolbox.ToolboxBlockEntity;
-import com.simibubi.create.content.equipment.toolbox.ToolboxMenu;
 import com.simibubi.create.foundation.gui.menu.MenuBase;
 import dev.imabad.confectioneering.blocks.ConfectionBlocks;
 import net.minecraft.client.Minecraft;
@@ -13,7 +10,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.ShulkerBoxSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;

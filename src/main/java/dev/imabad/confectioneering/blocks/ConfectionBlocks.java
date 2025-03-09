@@ -1,23 +1,15 @@
 package dev.imabad.confectioneering.blocks;
 
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.builders.MenuBuilder;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.MenuEntry;
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.imabad.confectioneering.Confectioneering;
 import dev.imabad.confectioneering.blocks.large_box.*;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.level.material.MapColor;
-
-import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 
 public class ConfectionBlocks {
 
