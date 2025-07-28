@@ -9,6 +9,7 @@ import dev.engine_room.flywheel.lib.transform.PoseTransformStack;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
 import net.createmod.catnip.math.AngleHelper;
 import net.createmod.catnip.math.VecHelper;
+import net.createmod.catnip.render.FluidRenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -76,7 +77,7 @@ public class EnroberRenderer extends SafeBlockEntityRenderer<EnroberBlockEntity>
             TextureAtlasSprite fluidTexture = Minecraft.getInstance()
                     .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
                     .apply(clientFluid.getFlowingTexture(fluidStack));
-            VertexConsumer fluidBuilder = FluidRenderer.getFluidBuilder(buffer);
+            VertexConsumer fluidBuilder = FluidRenderHelper.getFluidBuilder(buffer);
             ms.pushPose();
             ms.translate(0, 0, -(7 /16f));
             FluidRenderer.renderFlowingTiledFace(Direction.SOUTH, min, yMin - yOffset, max, yMin, 1, fluidBuilder, ms, light, color, fluidTexture);

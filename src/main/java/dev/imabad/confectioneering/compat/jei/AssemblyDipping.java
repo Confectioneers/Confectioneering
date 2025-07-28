@@ -38,11 +38,8 @@ public class AssemblyDipping extends SequencedAssemblySubCategory {
                 .getFluidIngredients()
                 .get(0);
 
-        builder
-                .addSlot(RecipeIngredientRole.INPUT, x + 4, 15)
-                .setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-                .addIngredients(ForgeTypes.FLUID_STACK, CreateRecipeCategory.withImprovedVisibility(fluidIngredient.getMatchingFluidStacks()))
-                .addRichTooltipCallback((JeiHelpers.fluidTooltip(fluidIngredient.getRequiredAmount())));
+        CreateRecipeCategory.addFluidSlot(builder, x+4, 15, fluidIngredient);
+
     }
 
 }

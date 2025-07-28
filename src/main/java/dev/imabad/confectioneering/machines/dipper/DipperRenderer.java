@@ -16,16 +16,21 @@ import dev.imabad.confectioneering.client.ConfectionPartialModels;
 import net.createmod.catnip.math.AngleHelper;
 import net.createmod.catnip.math.VecHelper;
 import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.FluidRenderHelper;
 import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidStack;
 
 public class DipperRenderer extends ShaftRenderer<DipperBlockEntity> {
@@ -132,9 +137,15 @@ public class DipperRenderer extends ShaftRenderer<DipperBlockEntity> {
             float max = min + (12 / 16f);
             float yOffset = (7 / 16f) * level;
             ms.pushPose();
-            ms.translate(0, yOffset, 0);
-            FluidRenderer.renderFluidBox(fluidStack.getFluid(), fluidStack.getAmount(), min, yMin - yOffset, min, max, yMin, max, buffer, ms, light,
-                    false, false);
+            ms.translate(0, -1, 0);
+            ms.translate(0, yMin + yOffset, 0);
+            IClientFluidTypeExtensions clientFluid = IClientFluidTypeExtensions.of(fluidStack.getFluid());
+            int color = clientFluid.getTintColor(fluidStack);
+            TextureAtlasSprite fluidTexture = Minecraft.getInstance()
+                    .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
+                    .apply(clientFluid.getFlowingTexture(fluidStack));
+            FluidRenderer.renderFlowingTiledFace(Direction.UP, min, min, max, max, 1,
+                    FluidRenderHelper.getFluidBuilder(buffer), ms, light, color, fluidTexture);
             ms.popPose();
         }
     }

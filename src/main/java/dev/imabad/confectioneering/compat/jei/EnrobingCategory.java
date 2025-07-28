@@ -32,11 +32,7 @@ public class EnrobingCategory extends CreateRecipeCategory<EnrobingRecipe> {
         FluidIngredient fluidIngredient = recipe.getFluidIngredients()
                 .get(0);
 
-        builder
-                .addSlot(RecipeIngredientRole.INPUT, 85, 25)
-                .setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-                .addIngredients(ForgeTypes.FLUID_STACK, CreateRecipeCategory.withImprovedVisibility(fluidIngredient.getMatchingFluidStacks()))
-                .addRichTooltipCallback((JeiHelpers.fluidTooltip(fluidIngredient.getRequiredAmount())));
+        CreateRecipeCategory.addFluidSlot(builder, 85, 25, fluidIngredient);
         builder
                 .addSlot(RecipeIngredientRole.INPUT, 50, 75)
                 .setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)

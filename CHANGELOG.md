@@ -1,3 +1,3 @@
-# 0.0.4 - Stacking boxes
+# 0.0.5 - Tightened Belts
 
-* Port to Create 6
+* Fix crash with JEI on Create 6
